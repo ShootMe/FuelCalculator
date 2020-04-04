@@ -53,10 +53,10 @@ namespace FuelCalculator {
             return fuelAmount;
         }
         private long GetNextAmount(long startingAmount, int toMove) {
-            int increase = FuelCapacity - 2 * toMove;
+            long increase = FuelCapacity - 2 * toMove;
             long nextAmount = (startingAmount - toMove) / increase;
 
-            if (nextAmount == 0 || nextAmount * (FuelCapacity - 2 * toMove) != startingAmount - toMove) {
+            if (nextAmount == 0 || nextAmount * increase != startingAmount - toMove) {
                 nextAmount = nextAmount * FuelCapacity + (startingAmount - toMove - nextAmount * increase) + 2 * toMove;
             } else {
                 nextAmount = nextAmount * FuelCapacity;

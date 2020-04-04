@@ -22,27 +22,35 @@ namespace FuelCalculator {
             AppendList(discrete.Distances, sb);
             sb.AppendLine($") (Fuel Needed = {discrete.CalculateFuel()})");
 
-            sb.AppendLine("--Real Values--");
-            CalculatorReal real = new CalculatorReal(fuelCapacity, distanceToTravel);
-            sb.Append($"(Distance To Travel = {distanceToTravel}) (Stops = ");
-            AppendList(real.Distances, sb);
-            sb.AppendLine($") (Fuel Needed = {real.CalculateFuel():0.##})");
+            if (discrete.Distances.Length <= 2000) {
+                sb.AppendLine("--Real Values--");
+                CalculatorReal real = new CalculatorReal(fuelCapacity, distanceToTravel);
+                sb.Append($"(Distance To Travel = {distanceToTravel}) (Stops = ");
+                AppendList(real.Distances, sb);
+                sb.AppendLine($") (Fuel Needed = {real.CalculateFuel():0.##})");
+            }
 
             Console.WriteLine(sb.ToString());
             Console.ReadLine();
         }
         private static void AppendList(int[] distances, StringBuilder builder) {
             int distance = 0;
-            foreach (int stop in distances) {
-                distance += stop;
+            if (distances.Length > 100) {
+                builder.Append("..., ");
+            }
+            for (int i = distances.Length > 100 ? distances.Length - 100 : 0; i < distances.Length; i++) {
+                distance += distances[i];
                 builder.Append($"{distance}, ");
             }
             builder.Length -= 2;
         }
         private static void AppendList(double[] distances, StringBuilder builder) {
             double distance = 0;
-            foreach (double stop in distances) {
-                distance += stop;
+            if (distances.Length > 100) {
+                builder.Append("..., ");
+            }
+            for (int i = distances.Length > 100 ? distances.Length - 100 : 0; i < distances.Length; i++) {
+                distance += distances[i];
                 builder.Append($"{distance:0.###}, ");
             }
             builder.Length -= 2;
