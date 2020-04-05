@@ -14,14 +14,14 @@ namespace FuelCalculator {
             if (distance > DistanceToTravel) {
                 distance = DistanceToTravel;
             }
-            int ratio = 3;
-            int leftOver = 0;
+            long ratio = 3;
+            long leftOver = 0;
 
             List<int> distanceList = new List<int>();
             distanceList.Add(distance);
 
             while (distance < DistanceToTravel) {
-                int travel = (FuelCapacity + leftOver) / ratio;
+                int travel = (int)((FuelCapacity + leftOver) / ratio);
                 if (travel <= 0) { travel = 1; }
 
                 leftOver = (FuelCapacity + leftOver) - travel * ratio;
@@ -43,13 +43,10 @@ namespace FuelCalculator {
 
             int index = distances.Length - 1;
             long fuelAmount = distances[index--];
-            int distance = (int)fuelAmount;
-            while (distance < DistanceToTravel) {
+            while (index >= 0) {
                 int toMove = distances[index--];
                 fuelAmount = GetNextAmount(fuelAmount, toMove);
-                distance += toMove;
             }
-
             return fuelAmount;
         }
         private long GetNextAmount(long startingAmount, int toMove) {

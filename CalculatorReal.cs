@@ -19,7 +19,7 @@ namespace FuelCalculator {
             List<double> distanceList = new List<double>();
             distanceList.Add(distance);
 
-            while (distance < DistanceToTravel) {
+            while (distance < DistanceToTravel && ratio < 4200) {
                 double travel = FuelCapacity / ratio;
                 double leftOver = FuelCapacity - travel * ratio;
                 if (travel + distance > DistanceToTravel) {

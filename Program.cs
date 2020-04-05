@@ -22,12 +22,12 @@ namespace FuelCalculator {
             AppendList(discrete.Distances, sb);
             sb.AppendLine($") (Fuel Needed = {discrete.CalculateFuel()})");
 
-            if (discrete.Distances.Length <= 2000) {
+            CalculatorReal real = new CalculatorReal(fuelCapacity, distanceToTravel);
+            if (real.Distances.Length <= 2050) {
                 sb.AppendLine("--Real Values--");
-                CalculatorReal real = new CalculatorReal(fuelCapacity, distanceToTravel);
                 sb.Append($"(Distance To Travel = {distanceToTravel}) (Stops = ");
                 AppendList(real.Distances, sb);
-                sb.AppendLine($") (Fuel Needed = {real.CalculateFuel():0.##})");
+                sb.AppendLine($") (Fuel Needed = {real.CalculateFuel():0.###})");
             }
 
             Console.WriteLine(sb.ToString());
